@@ -1,31 +1,24 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
+// Define props with default
 const props = withDefaults(defineProps<{
     name: string,
-    isEdit: boolean
+    isEdit?: boolean
 }>(),
     {
         isEdit: false
     })
 
-</script>
-<script lang="ts">
-import { ref } from 'vue'
+// Local reactive state
 const text_value = ref("")
-
-
-export default {
-    data() {
-        return {
-            text_value
-        }
-    }
-}
 </script>
 
 <template>
     <div class="flex-input">
         <div class="label">{{ name }}</div>
-        <input v-model=text_value></input>
+        <div class="label" v-if="isEdit==false">{{ text_value }}</div>
+        <input v-model=text_value v-else></input>
     </div>
 </template>
 
@@ -36,9 +29,13 @@ button {
 
 .flex-input {
     display: flex;
+    min-width: 200pt;
+    padding-top: 2pt;
+    padding-bottom: 2pt;
 }
 
 .label {
+    padding-left: 6pt;
     padding-right: 6pt;
 }
 </style>

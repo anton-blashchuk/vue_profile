@@ -1,17 +1,22 @@
 <script setup lang="ts">
 import TextLabelOrInput from './TextLabelOrInput.vue'
+import { ref } from 'vue'
 
 
 defineProps<{
   msg: string
 }>()
 
+const is_edit = ref(false)
+const toggleButtonText = ref("toggle")
+
 </script>
 
 <template>
   <div class="greetings">
-    <TextLabelOrInput name="Navn"/>
-    <h1 class="green">{{ msg }}</h1>
+    <TextLabelOrInput name="Navn" :isEdit="is_edit"/>
+    <TextLabelOrInput name="E-post" :isEdit="is_edit"/>
+    <button @click="is_edit=!is_edit">{{ is_edit ? 'Save' : 'Edit' }}</button>
   </div>
 </template>
 
