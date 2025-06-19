@@ -4,12 +4,9 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-  </header>
+
   <body>
-    <div>
       <HelloWorld msg="Woopsie"/>
-    </div>
   </body>
 </template>
 
