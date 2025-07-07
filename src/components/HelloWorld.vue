@@ -1,27 +1,46 @@
 <script setup lang="ts">
 import TextLabelOrInput from './TextLabelOrInput.vue'
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+import { useVuelidate } from '@vuelidate/core'
+import { required, email } from '@vuelidate/validators'
 
 
-defineProps<{
-  msg: string
-}>()
+const form = reactive({
+ username: '',
+ email: '',
+ avatarUrl: ''
+})
 
+const rules = {
+  username: { required },
+  email: { required, email },
+  avatarUrl: {  }
+
+}
 const is_edit = ref(false)
-const username = ref('name surname')
-const email = ref('email@email.com')
-const avatarUrl = ref('https://pixy.org/src/31/thumbs350/315160.jpg')
+const profileModel = ref( {
+  username : "name 2",
+  email: "email2@abc.com",
+  avatarUrl: "https://prioskompetanse.blob.core.windows.net/followupmedia/uploads/446b104a-24e5-4ed6-8428-7ec7853c7e64.jpg"
+})
 
+function toggleEdit() {
+  if (!is_edit.value) {
+    is_edit.value = true
+    return
+  }
+  //procedure of validation and saving
 
+}
 </script>
 
 <template>
   <div class=".profile-container">
-    <TextLabelOrInput name="Navn" :isEdit="is_edit" v-model="username" />
-    <TextLabelOrInput name="E-post" :isEdit="is_edit" v-model="email" />
-    <TextLabelOrInput name="Avatar URL" :isEdit="is_edit" v-model="avatarUrl" />
+    <TextLabelOrInput name="Navn" :isEdit="is_edit" v-model="profileModel.username" />
+    <TextLabelOrInput name="E-post" :isEdit="is_edit" v-model="profileModel.email" />
+    <TextLabelOrInput name="Avatar URL" :isEdit="is_edit" v-model="profileModel.avatarUrl" />
 
-    <img :src="avatarUrl" width="200pt" />
+    <img :src="profileModel.avatarUrl" width="200pt" />
     <button @click="is_edit = !is_edit">{{ is_edit ? 'Save' : 'Edit' }}</button>
   </div>
 </template>
